@@ -95,14 +95,14 @@ namespace MediaTek86.vue
             // 
             // txtTel
             // 
-            this.txtTel.Location = new System.Drawing.Point(431, 22);
+            this.txtTel.Location = new System.Drawing.Point(438, 22);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(243, 26);
             this.txtTel.TabIndex = 6;
             // 
             // txtMail
             // 
-            this.txtMail.Location = new System.Drawing.Point(431, 63);
+            this.txtMail.Location = new System.Drawing.Point(438, 63);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(243, 26);
             this.txtMail.TabIndex = 7;
@@ -110,16 +110,16 @@ namespace MediaTek86.vue
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(375, 110);
+            this.label5.Location = new System.Drawing.Point(371, 110);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 20);
+            this.label5.Size = new System.Drawing.Size(61, 20);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Profil";
+            this.label5.Text = "Service";
             // 
             // cboProfil
             // 
             this.cboProfil.FormattingEnabled = true;
-            this.cboProfil.Location = new System.Drawing.Point(431, 107);
+            this.cboProfil.Location = new System.Drawing.Point(438, 107);
             this.cboProfil.Name = "cboProfil";
             this.cboProfil.Size = new System.Drawing.Size(243, 28);
             this.cboProfil.TabIndex = 9;
