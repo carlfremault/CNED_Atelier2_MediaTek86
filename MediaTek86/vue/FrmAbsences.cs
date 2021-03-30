@@ -10,16 +10,17 @@ using System.Windows.Forms;
 
 namespace MediaTek86.vue
 {
+    /// <summary>
+    /// Interface qui gère l'affichage des absences.
+    /// </summary>
     public partial class FrmAbsences : Form
     {
+        /// <summary>
+        /// Constructeur de la classe.
+        /// </summary>
         public FrmAbsences()
         {
             InitializeComponent();
-        }
-
-        private void FrmAbsences_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -9,10 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaTek86.vue
-
 {
+    /// <summary>
+    /// Interface qui gère l'authentification à l'application.
+    /// </summary>
     public partial class FrmAuthentification : Form
     {
+        /// <summary>
+        /// Constructeur de la classe.
+        /// </summary>
         public FrmAuthentification()
         {
             InitializeComponent();

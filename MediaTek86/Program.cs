@@ -1,4 +1,5 @@
-﻿using MediaTek86.vue;
+﻿using MediaTek86.controleur;
+using MediaTek86.vue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,9 @@ using System.Windows.Forms;
 
 namespace MediaTek86
 {
+    /// <summary>
+    /// Point d'entrée de l'application.
+    /// </summary>
     static class Program
     {
         /// <summary>
@@ -17,7 +21,7 @@ namespace MediaTek86
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmAuthentification());
+            new Controle();
         }
     }
 }

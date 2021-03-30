@@ -45,6 +45,7 @@ namespace MediaTek86.vue
             this.btnAjoutPersonnel.TabIndex = 0;
             this.btnAjoutPersonnel.Text = "Ajouter personnel";
             this.btnAjoutPersonnel.UseVisualStyleBackColor = true;
+            this.btnAjoutPersonnel.Click += new System.EventHandler(this.btnAjoutPersonnel_Click);
             // 
             // btnModifPersonnel
             // 
@@ -54,6 +55,7 @@ namespace MediaTek86.vue
             this.btnModifPersonnel.TabIndex = 1;
             this.btnModifPersonnel.Text = "Modifier personnel";
             this.btnModifPersonnel.UseVisualStyleBackColor = true;
+            this.btnModifPersonnel.Click += new System.EventHandler(this.btnModifPersonnel_Click);
             // 
             // btnSuppPersonnel
             // 
@@ -63,6 +65,7 @@ namespace MediaTek86.vue
             this.btnSuppPersonnel.TabIndex = 2;
             this.btnSuppPersonnel.Text = "Supprimer personnel";
             this.btnSuppPersonnel.UseVisualStyleBackColor = true;
+            this.btnSuppPersonnel.Click += new System.EventHandler(this.btnSuppPersonnel_Click);
             // 
             // btnAffichAbsences
             // 
