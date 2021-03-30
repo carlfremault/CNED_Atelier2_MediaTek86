@@ -80,5 +80,14 @@ namespace MediaTek86.controleur
             AccesDonnees.AddPersonnel(personnel);
             FermerAMPersonnel();
         }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode DelPersonnel de la classe AccesDonnees pour la suppression d'un membre du personnel.
+        /// </summary>
+        /// <param name="personnel">Instance de la classe Personnel qui représent le membre du personnel à supprimer.</param>
+        public void DelPersonnel(Personnel personnel)
+        {
+            AccesDonnees.DelPersonnel(personnel);
+        }
     }
 }

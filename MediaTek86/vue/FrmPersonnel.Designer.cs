@@ -64,6 +64,7 @@ namespace MediaTek86.vue
             this.btnSuppPersonnel.TabIndex = 2;
             this.btnSuppPersonnel.Text = "Supprimer personnel";
             this.btnSuppPersonnel.UseVisualStyleBackColor = true;
+            this.btnSuppPersonnel.Click += new System.EventHandler(this.btnSuppPersonnel_Click);
             // 
             // btnAffichAbsences
             // 

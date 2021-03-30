@@ -74,7 +74,21 @@ namespace MediaTek86.dal
             parameters.Add("@mail", personnel.Mail);
             ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
             connection.ReqUpdate(req, parameters);
+            connection.Close();
         }
 
+        /// <summary>
+        /// Méthode qui interpelle la classe ConnexionBDD pour supprimer un membre du personnel de la base de données.
+        /// </summary>
+        /// <param name="personnel">Objet de type Personnel, correspondant au membre du personnel à supprimer.</param>
+        public static void DelPersonnel(Personnel personnel)
+        {
+            string req = "delete from personnel where idpersonnel = @idpersonnel";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnel.IdPersonnel);
+            ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
+            connection.ReqUpdate(req, parameters);
+            connection.Close();
+        }
     }
 }

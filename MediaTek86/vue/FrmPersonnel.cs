@@ -59,13 +59,38 @@ namespace MediaTek86.vue
         }
 
         /// <summary>
-        /// Méthode évenementielle après un clic sur le bouton 'Ajouter personnel). Appelle la méthode AjouterPersonnel() du contrôleur.
+        /// Méthode évenementielle après un clic sur le bouton 'Ajouter personnel'. Appelle la méthode AjouterPersonnel() du contrôleur.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAjoutPersonnel_Click(object sender, EventArgs e)
         {
             controle.AjouterPersonnel();
+        }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Supprimer personnel'.
+        /// Vérifie si un membre du personnel a été sélectionné.
+        /// Demande confirmation de suppression.
+        /// Après confirmation, appelle la méthode DelPersonnel() du contrôleur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSuppPersonnel_Click(object sender, EventArgs e)
+        {
+            if(dgvPersonnel.SelectedRows.Count > 0)
+            {
+                Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                if (MessageBox.Show("Confirmez-vous la suppression de " + personnel.Prenom + " " + personnel.Nom + " de la liste?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.DelPersonnel(personnel);
+                    RemplirListePersonnel();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un membre du personnel.", "Information");
+            }
         }
     }
 }
