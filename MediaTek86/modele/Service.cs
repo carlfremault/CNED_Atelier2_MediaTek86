@@ -11,7 +11,13 @@ namespace MediaTek86.modele
     /// </summary>
     public class Service
     {
+        /// <summary>
+        /// idService de la table 'service'
+        /// </summary>
         private int idService;
+        /// <summary>
+        /// nom de la table 'service'
+        /// </summary>
         private string nom;
 
         /// <summary>

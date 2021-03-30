@@ -11,7 +11,13 @@ namespace MediaTek86.modele
     /// </summary>
     public class Motif
     {
+        /// <summary>
+        /// idMotif de la table 'motif'
+        /// </summary>
         private int idMotif;
+        /// <summary>
+        /// libellé de la table 'motif'
+        /// </summary>
         private string libelle;
 
         /// <summary>

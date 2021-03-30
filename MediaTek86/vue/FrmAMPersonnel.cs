@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace MediaTek86.vue
 {
+    /// <summary>
+    /// Interface qui gère l'ajout et la modification du personnel.
+    /// </summary>
     public partial class FrmAMPersonnel : Form
     {
+        /// <summary>
+        /// Constructeur de la classe.
+        /// </summary>
         public FrmAMPersonnel()
         {
             InitializeComponent();

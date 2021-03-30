@@ -11,9 +11,21 @@ namespace MediaTek86.modele
     /// </summary>
     public class Absence
     {
+        /// <summary>
+        /// idPersonnel de la table 'absence'
+        /// </summary>
         private int idPersonnel;
+        /// <summary>
+        /// dateDebut de la table 'absence'
+        /// </summary>
         private string dateDebut;
+        /// <summary>
+        /// motif de la table 'absence'
+        /// </summary>
         private string motif;
+        /// <summary>
+        /// dateFin de la table 'absence'
+        /// </summary>
         private string dateFin;
 
         /// <summary>

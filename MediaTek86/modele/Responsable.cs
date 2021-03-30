@@ -11,7 +11,13 @@ namespace MediaTek86.modele
     /// </summary>
     public class Responsable
     {
+        /// <summary>
+        /// login de la table 'responsable'
+        /// </summary>
         private string login;
+        /// <summary>
+        /// pwd de la table 'responsable'
+        /// </summary>
         private string pwd;
 
         /// <summary>

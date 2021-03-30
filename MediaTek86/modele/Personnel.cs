@@ -11,11 +11,33 @@ namespace MediaTek86.modele
     /// </summary>
     public class Personnel
     {
+        /// <summary>
+        /// idPersonnel de la table 'personnel'
+        /// </summary>
         private int idPersonnel;
+        /// <summary>
+        /// idService de la table 'personnel'
+        /// </summary>
         private int idService;
+        /// <summary>
+        /// libellé service de la table 'service'
+        /// </summary>
+        private string service;
+        /// <summary>
+        /// nom de la table 'personnel'
+        /// </summary>
         private string nom;
+        /// <summary>
+        /// prenom de la table 'personnel'
+        /// </summary>
         private string prenom;
+        /// <summary>
+        /// tel de la table 'personnel'
+        /// </summary>
         private string tel;
+        /// <summary>
+        /// mail de la table 'personnel'
+        /// </summary>
         private string mail;
 
         /// <summary>
@@ -25,14 +47,16 @@ namespace MediaTek86.modele
         /// <param name="idService"></param>
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
+        /// <param name="service"></param>
         /// <param name="tel"></param>
         /// <param name="mail"></param>
-        public Personnel(int idPersonnel, int idService, string nom, string prenom, string tel, string mail)
+        public Personnel(int idPersonnel, int idService, string nom, string prenom, string service, string tel, string mail)
         {
             this.idPersonnel = idPersonnel;
             this.idService = idService;
             this.nom = nom;
             this.prenom = prenom;
+            this.service = service;
             this.tel = tel;
             this.mail = mail;
         }
@@ -41,7 +65,9 @@ namespace MediaTek86.modele
         public int IdService { get => idService; }
         public string Nom { get => nom; }
         public string Prenom { get => prenom; }
+        public string Service { get => service; }
         public string Tel { get => tel; }
         public string Mail { get => mail; }
+        
     }
 }

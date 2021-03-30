@@ -95,7 +95,6 @@ namespace MediaTek86.vue
             this.Controls.Add(this.dgvAbsences);
             this.Name = "FrmAbsences";
             this.Text = "MediaTek86 - Absences";
-            this.Load += new System.EventHandler(this.FrmAbsences_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbsences)).EndInit();
             this.ResumeLayout(false);
 
