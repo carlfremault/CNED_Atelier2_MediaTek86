@@ -62,33 +62,32 @@ namespace MediaTek86.modele
         }
 
         /// <summary>
-        /// Encapsulation du champ idPersonnel. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ idPersonnel. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public int IdPersonnel { get => idPersonnel; }
+        public int IdPersonnel { get => idPersonnel; set => idPersonnel = value; }
         /// <summary>
-        /// Encapsulation du champ idService. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ idService. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public int IdService { get => idService; }
+        public int IdService { get => idService; set => idService = value; }
         /// <summary>
-        /// Encapsulation du champ nom. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ nom. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string Nom { get => nom; }
+        public string Nom { get => nom; set => nom = value; }
         /// <summary>
-        /// Encapsulation du champ prenom. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ prenom. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string Prenom { get => prenom; }
+        public string Prenom { get => prenom; set => prenom = value; }
         /// <summary>
-        /// Encapsulation du champ service. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ service. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string Service { get => service; }
+        public string Service { get => service; set => service = value; }
         /// <summary>
-        /// Encapsulation du champ tel. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ tel. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string Tel { get => tel; }
+        public string Tel { get => tel; set => tel = value; }
         /// <summary>
-        /// Encapsulation du champ mail. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ mail. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string Mail { get => mail; }
-        
+        public string Mail { get => mail; set => mail = value; }
     }
 }

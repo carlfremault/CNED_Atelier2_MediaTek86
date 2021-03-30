@@ -19,7 +19,7 @@ namespace MediaTek86.dal
         private static string connectionString = "server=localhost;user id=mediatek86; password=motdepasse; database=mediatek86; Sslmode=none";
 
         /// <summary>
-        /// Méthode qui interpelle la classe ConnexionBDD pour récupérer une liste d'objets du type Personnel, correspondant aux membres du personnel enregistrés dans la base de données.
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour récupérer une liste d'objets du type Personnel, correspondant aux membres du personnel enregistrés dans la base de données.
         /// </summary>
         /// <returns>Une liste d'objets du type Personnel.</returns>
         public static List<Personnel> GetLePersonnel()
@@ -31,15 +31,14 @@ namespace MediaTek86.dal
             curseur.ReqSelect(req, null);
             while (curseur.Read())
             {
-                Personnel personnel = new Personnel((int)curseur.Field("idpersonnel"), (int)curseur.Field("idservice"), (string)curseur.Field("nom"), (string)curseur.Field("prenom"), (string)curseur.Field("service"), (string)curseur.Field("tel"), (string)curseur.Field("mail"));
-                lePersonnel.Add(personnel);
+                lePersonnel.Add(new Personnel((int)curseur.Field("idpersonnel"), (int)curseur.Field("idservice"), (string)curseur.Field("nom"), (string)curseur.Field("prenom"), (string)curseur.Field("service"), (string)curseur.Field("tel"), (string)curseur.Field("mail")));
             }
             curseur.Close();
             return lePersonnel;
         }
 
         /// <summary>
-        /// Méthode qui interpelle la classe ConnexionBDD pour récupérer une liste d'objets du type Service, correspondant aux différents services enregistrés dans la base de données.
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour récupérer une liste d'objets du type Service, correspondant aux différents services enregistrés dans la base de données.
         /// </summary>
         /// <returns>Une liste d'objets du type Service.</returns>
         public static List<Service> GetLesServices()
@@ -58,7 +57,7 @@ namespace MediaTek86.dal
         }
 
         /// <summary>
-        /// Méthode qui interpelle la classe ConnexionBDD pour ajouter un nouveau membre du personnel dans la base de données.
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour ajouter un nouveau membre du personnel dans la base de données.
         /// </summary>
         /// <param name="personnel">Objet de type Personnel, correspondant au nouveau membre du personnel.</param>
         public static void AddPersonnel(Personnel personnel)
@@ -78,7 +77,7 @@ namespace MediaTek86.dal
         }
 
         /// <summary>
-        /// Méthode qui interpelle la classe ConnexionBDD pour supprimer un membre du personnel de la base de données.
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour supprimer un membre du personnel de la base de données.
         /// </summary>
         /// <param name="personnel">Objet de type Personnel, correspondant au membre du personnel à supprimer.</param>
         public static void DelPersonnel(Personnel personnel)
@@ -86,6 +85,26 @@ namespace MediaTek86.dal
             string req = "delete from personnel where idpersonnel = @idpersonnel";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", personnel.IdPersonnel);
+            ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
+            connection.ReqUpdate(req, parameters);
+            connection.Close();
+        }
+
+        /// <summary>
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour modifier un membre du personnel présent dans la base de données.
+        /// </summary>
+        /// <param name="personnel">Objet de type Personnel, correspondant au membre du personnel à modifier.</param>
+        public static void UpdatePersonnel(Personnel personnel)
+        {
+            string req = "update personnel set idservice = @idservice, nom = @nom, prenom = @prenom, tel = @tel, mail = @mail ";
+            req += "where idpersonnel = @idpersonnel;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnel.IdPersonnel);
+            parameters.Add("@idservice", personnel.IdService);
+            parameters.Add("@nom", personnel.Nom);
+            parameters.Add("@prenom", personnel.Prenom);
+            parameters.Add("@tel", personnel.Tel);
+            parameters.Add("@mail", personnel.Mail);
             ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
             connection.ReqUpdate(req, parameters);
             connection.Close();

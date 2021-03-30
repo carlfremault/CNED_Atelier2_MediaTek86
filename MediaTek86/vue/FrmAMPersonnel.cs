@@ -33,6 +33,11 @@ namespace MediaTek86.vue
         private Boolean modification = false;
 
         /// <summary>
+        /// Instance de la classe Personnel qui représente un membre du personnel à modifier.
+        /// </summary>
+        private Personnel personnelAModifier;
+
+        /// <summary>
         /// Constructeur de la classe.
         /// </summary>
         public FrmAMPersonnel(Controle controle)
@@ -90,7 +95,7 @@ namespace MediaTek86.vue
         }
 
         /// <summary>
-        /// Méthode évenementielle après un clic sur le bouton 'Enregistrer' pour enregistrer l'ajout ou la modification d'un membre du personnel..
+        /// Méthode évenementielle après un clic sur le bouton 'Enregistrer' pour enregistrer l'ajout ou la modification d'un membre du personnel.
         /// La méthode vérifie si on est en train de modifier ou ajouter un membre du personnel et appelle la méthode correspondante du contrôleur.
         /// </summary>
         /// <param name="sender"></param>
@@ -100,24 +105,49 @@ namespace MediaTek86.vue
             if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !txtMail.Text.Equals("") && !txtTel.Text.Equals("") && cboService.SelectedIndex != -1)
             {
                 Service leService = (Service)bdgServices.List[bdgServices.Position];
-                int idPersonnel = 0;
                 if (modification)
                 {
-                    // à remplir en cas de modification
-                }
-                Personnel lePersonnel = new Personnel(idPersonnel, leService.IdService, txtNom.Text, txtPrenom.Text, leService.Nom, txtTel.Text, txtMail.Text);
-                if (modification)
-                {
-                    // à remplir en cas de modification
+                    personnelAModifier.Nom = txtNom.Text;
+                    personnelAModifier.Prenom = txtPrenom.Text;
+                    personnelAModifier.Tel = txtTel.Text;
+                    personnelAModifier.Mail = txtMail.Text;
+                    personnelAModifier.IdService = leService.IdService;
+                    personnelAModifier.Service = leService.Nom;
+                    if (MessageBox.Show("Confirmez-vous la modification?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        controle.UpdatePersonnel(personnelAModifier);
+                        modification = false;
+                    }
                 }
                 else
                 {
+                    int idPersonnel = 0;
+                    Personnel lePersonnel = new Personnel(idPersonnel, leService.IdService, txtNom.Text, txtPrenom.Text, leService.Nom, txtTel.Text, txtMail.Text);
                     controle.AddPersonnel(lePersonnel);
                 }
             }
             else
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Méthode qui récupère un objet de type Personnel qui représente le membre du personnel à modifier.
+        /// Récupère les propriétés de cet objet pour les afficher dans les champs correspondants.
+        /// </summary>
+        /// <param name="personnel">Objet de type Personnel qui représente le membre du personnel à modifier.</param>
+        public void ModifierPersonnel(Personnel personnel)
+        {
+            if (!(personnel is null))
+            {
+                modification = true;
+                personnelAModifier = personnel;
+                txtNom.Text = personnel.Nom;
+                txtPrenom.Text = personnel.Prenom;
+                txtTel.Text = personnel.Tel;
+                txtMail.Text = personnel.Mail;
+                cboService.SelectedIndex = cboService.FindStringExact(personnel.Service);
             }
         }
     }

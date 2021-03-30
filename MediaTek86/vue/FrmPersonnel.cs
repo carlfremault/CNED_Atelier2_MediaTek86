@@ -28,20 +28,12 @@ namespace MediaTek86.vue
         BindingSource bdgPersonnel = new BindingSource();
 
         /// <summary>
-        /// Constructeur de la classe qui recupère le controleur.
+        /// Constructeur de la classe qui recupère le controleur et appelle la méthode RemplirListePersonnel pour remplir la liste du personnel.
         /// </summary>
         public FrmPersonnel(Controle controle)
         {
             InitializeComponent();
             this.controle = controle;
-            Init();
-        }
-
-        /// <summary>
-        /// Méthode qui gère l'initialisation de la vue.
-        /// </summary>
-        public void Init()
-        {
             RemplirListePersonnel();
         }
 
@@ -59,7 +51,7 @@ namespace MediaTek86.vue
         }
 
         /// <summary>
-        /// Méthode évenementielle après un clic sur le bouton 'Ajouter personnel'. Appelle la méthode AjouterPersonnel() du contrôleur.
+        /// Méthode évenementielle après un clic sur le bouton 'Ajouter personnel'. Appelle la méthode AjouterPersonnel du contrôleur.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -72,7 +64,7 @@ namespace MediaTek86.vue
         /// Méthode évenementielle après un clic sur le bouton 'Supprimer personnel'.
         /// Vérifie si un membre du personnel a été sélectionné.
         /// Demande confirmation de suppression.
-        /// Après confirmation, appelle la méthode DelPersonnel() du contrôleur.
+        /// Après confirmation, appelle la méthode DelPersonnel du contrôleur.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -86,6 +78,26 @@ namespace MediaTek86.vue
                     controle.DelPersonnel(personnel);
                     RemplirListePersonnel();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un membre du personnel.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Modifier personnel'.
+        /// Vérifie su un membre du personnel a été sélectionné.
+        /// Récupère cet objet et l'envoie à la méthode ModifierPersonnel du contrôleur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnModifPersonnel_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnel.SelectedRows.Count > 0)
+            {
+                Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                controle.ModifierPersonnel(personnel);
             }
             else
             {

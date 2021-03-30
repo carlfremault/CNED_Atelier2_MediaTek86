@@ -57,7 +57,18 @@ namespace MediaTek86.controleur
         /// </summary>
         public void AjouterPersonnel()
         {
-            frmAMPersonnel.Text = "Ajouter personnel";
+            frmAMPersonnel.Text = "MediaTek86 - Ajouter personnel";
+            frmAMPersonnel.ShowDialog();
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode ModifierPersonnel de la vue FrmAmPersonnel pour lui envoyer le personnel sélectionné et ouvrir la vue.
+        /// </summary>
+        /// <param name="personnel"></param>
+        public void ModifierPersonnel(Personnel personnel)
+        {
+            frmAMPersonnel.Text = "MediaTek86 - Modifier personnel";
+            frmAMPersonnel.ModifierPersonnel(personnel);
             frmAMPersonnel.ShowDialog();
         }
 
@@ -73,6 +84,7 @@ namespace MediaTek86.controleur
 
         /// <summary>
         /// Méthode qui appelle la méthode AddPersonnel de la classe AccesDonnees pour l'ajout d'un nouveau membre du personnel.
+        /// Appelle ensuite la méthode FermerAMPersonnel pour fermer la vue.
         /// </summary>
         /// <param name="personnel">Instance de la classe Personnel qui représente le nouveau membre du personnel.</param>
         public void AddPersonnel(Personnel personnel)
@@ -84,10 +96,21 @@ namespace MediaTek86.controleur
         /// <summary>
         /// Méthode qui appelle la méthode DelPersonnel de la classe AccesDonnees pour la suppression d'un membre du personnel.
         /// </summary>
-        /// <param name="personnel">Instance de la classe Personnel qui représent le membre du personnel à supprimer.</param>
+        /// <param name="personnel">Instance de la classe Personnel qui représente le membre du personnel à supprimer.</param>
         public void DelPersonnel(Personnel personnel)
         {
             AccesDonnees.DelPersonnel(personnel);
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode UpdatePersonnel de la classe AccesDonnees pour modifier un membre du personnel.
+        /// Appelle ensuite la méthode FermerAMPersonnel pour fermer la vue.
+        /// </summary>
+        /// <param name="personnel">Instance de la classe Personnel qui représente le membre du personnel à modifier.</param>
+        public void UpdatePersonnel(Personnel personnel)
+        {
+            AccesDonnees.UpdatePersonnel(personnel);
+            FermerAMPersonnel();
         }
     }
 }
