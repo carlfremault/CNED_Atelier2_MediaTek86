@@ -17,8 +17,14 @@ namespace MediaTek86.vue
     /// </summary>
     public partial class FrmPersonnel : Form
     {
+        /// <summary>
+        /// Instance de la classe Controle.
+        /// </summary>
         private Controle controle;
 
+        /// <summary>
+        /// Objet pour gérer la liste du personnel.
+        /// </summary>
         BindingSource bdgPersonnel = new BindingSource();
 
         /// <summary>
@@ -31,11 +37,17 @@ namespace MediaTek86.vue
             Init();
         }
 
+        /// <summary>
+        /// Méthode qui gère l'initialisation de la vue.
+        /// </summary>
         public void Init()
         {
             RemplirListePersonnel();
         }
 
+        /// <summary>
+        /// Méthode qui remplit la liste du personnel.
+        /// </summary>
         public void RemplirListePersonnel()
         {
             List<Personnel> lePersonnel = controle.GetLePersonnel();
@@ -44,6 +56,16 @@ namespace MediaTek86.vue
             dgvPersonnel.Columns["idpersonnel"].Visible = false;
             dgvPersonnel.Columns["idservice"].Visible = false;
             dgvPersonnel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Ajouter personnel). Appelle la méthode AjouterPersonnel() du contrôleur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAjoutPersonnel_Click(object sender, EventArgs e)
+        {
+            controle.AjouterPersonnel();
         }
     }
 }

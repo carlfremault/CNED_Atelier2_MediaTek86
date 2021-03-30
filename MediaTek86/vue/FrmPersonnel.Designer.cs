@@ -45,6 +45,7 @@ namespace MediaTek86.vue
             this.btnAjoutPersonnel.TabIndex = 0;
             this.btnAjoutPersonnel.Text = "Ajouter personnel";
             this.btnAjoutPersonnel.UseVisualStyleBackColor = true;
+            this.btnAjoutPersonnel.Click += new System.EventHandler(this.btnAjoutPersonnel_Click);
             // 
             // btnModifPersonnel
             // 

@@ -31,10 +31,10 @@ namespace MediaTek86.modele
         /// <summary>
         /// Constructeur, valorise les propriétés.
         /// </summary>
-        /// <param name="idPersonnel"></param>
-        /// <param name="dateDebut"></param>
-        /// <param name="motif"></param>
-        /// <param name="dateFin"></param>
+        /// <param name="idPersonnel">idPersonnel du membre du personnel.</param>
+        /// <param name="dateDebut">La date de début de l'absence.</param>
+        /// <param name="motif">Le motif de l'absence.</param>
+        /// <param name="dateFin">La date de fin de l'absence.</param>
         public Absence(int idPersonnel, string dateDebut, string motif, string dateFin)
         {
             this.idPersonnel = idPersonnel;
@@ -43,9 +43,21 @@ namespace MediaTek86.modele
             this.dateFin = dateFin;
         }
 
+        /// <summary>
+        /// Encapsulation du champ idPersonnel. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public int IdPersonnel { get => idPersonnel; }
+        /// <summary>
+        /// Encapsulation du champ dateDebut. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string DateDebut { get => dateDebut; }
+        /// <summary>
+        /// Encapsulation du champ motif. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string Motif { get => motif; }
+        /// <summary>
+        /// Encapsulation du champ dateFin. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string DateFin { get => dateFin; }
     }
 }

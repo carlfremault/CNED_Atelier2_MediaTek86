@@ -43,13 +43,13 @@ namespace MediaTek86.modele
         /// <summary>
         /// Constructeur, valorise les propriétés.
         /// </summary>
-        /// <param name="idPersonnel"></param>
-        /// <param name="idService"></param>
-        /// <param name="nom"></param>
-        /// <param name="prenom"></param>
-        /// <param name="service"></param>
-        /// <param name="tel"></param>
-        /// <param name="mail"></param>
+        /// <param name="idPersonnel">idPersonnel du membre du personnel.</param>
+        /// <param name="idService">idService du membre du personnel.</param>
+        /// <param name="nom">Nom du membre du personnel.</param>
+        /// <param name="prenom">Prénom du membre du personnel.</param>
+        /// <param name="service">Service du membre du personnel.</param>
+        /// <param name="tel">Téléphone du membre du personnel.</param>
+        /// <param name="mail">Adresse mail du membre du personnel.</param>
         public Personnel(int idPersonnel, int idService, string nom, string prenom, string service, string tel, string mail)
         {
             this.idPersonnel = idPersonnel;
@@ -61,12 +61,33 @@ namespace MediaTek86.modele
             this.mail = mail;
         }
 
+        /// <summary>
+        /// Encapsulation du champ idPersonnel. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public int IdPersonnel { get => idPersonnel; }
+        /// <summary>
+        /// Encapsulation du champ idService. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public int IdService { get => idService; }
+        /// <summary>
+        /// Encapsulation du champ nom. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string Nom { get => nom; }
+        /// <summary>
+        /// Encapsulation du champ prenom. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string Prenom { get => prenom; }
+        /// <summary>
+        /// Encapsulation du champ service. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string Service { get => service; }
+        /// <summary>
+        /// Encapsulation du champ tel. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string Tel { get => tel; }
+        /// <summary>
+        /// Encapsulation du champ mail. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
         public string Mail { get => mail; }
         
     }

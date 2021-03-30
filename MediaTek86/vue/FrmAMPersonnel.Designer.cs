@@ -38,7 +38,7 @@ namespace MediaTek86.vue
             this.txtTel = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cboProfil = new System.Windows.Forms.ComboBox();
+            this.cboService = new System.Windows.Forms.ComboBox();
             this.btnEnregistrer = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -116,13 +116,13 @@ namespace MediaTek86.vue
             this.label5.TabIndex = 8;
             this.label5.Text = "Service";
             // 
-            // cboProfil
+            // cboService
             // 
-            this.cboProfil.FormattingEnabled = true;
-            this.cboProfil.Location = new System.Drawing.Point(438, 107);
-            this.cboProfil.Name = "cboProfil";
-            this.cboProfil.Size = new System.Drawing.Size(243, 28);
-            this.cboProfil.TabIndex = 9;
+            this.cboService.FormattingEnabled = true;
+            this.cboService.Location = new System.Drawing.Point(438, 107);
+            this.cboService.Name = "cboService";
+            this.cboService.Size = new System.Drawing.Size(243, 28);
+            this.cboService.TabIndex = 9;
             // 
             // btnEnregistrer
             // 
@@ -132,6 +132,7 @@ namespace MediaTek86.vue
             this.btnEnregistrer.TabIndex = 10;
             this.btnEnregistrer.Text = "Enregistrer";
             this.btnEnregistrer.UseVisualStyleBackColor = true;
+            this.btnEnregistrer.Click += new System.EventHandler(this.btnEnregistrer_Click);
             // 
             // btnAnnuler
             // 
@@ -141,6 +142,7 @@ namespace MediaTek86.vue
             this.btnAnnuler.TabIndex = 11;
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
+            this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
             // 
             // FrmAMPersonnel
             // 
@@ -149,7 +151,7 @@ namespace MediaTek86.vue
             this.ClientSize = new System.Drawing.Size(693, 170);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnEnregistrer);
-            this.Controls.Add(this.cboProfil);
+            this.Controls.Add(this.cboService);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtMail);
             this.Controls.Add(this.txtTel);
@@ -177,7 +179,7 @@ namespace MediaTek86.vue
         private System.Windows.Forms.TextBox txtTel;
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cboProfil;
+        private System.Windows.Forms.ComboBox cboService;
         private System.Windows.Forms.Button btnEnregistrer;
         private System.Windows.Forms.Button btnAnnuler;
     }
