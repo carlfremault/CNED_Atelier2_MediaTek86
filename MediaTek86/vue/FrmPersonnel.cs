@@ -65,7 +65,8 @@ namespace MediaTek86.vue
         /// Méthode évenementielle après un clic sur le bouton 'Supprimer personnel'.
         /// Vérifie si un membre du personnel a été sélectionné.
         /// Demande confirmation de suppression.
-        /// Après confirmation, appelle la méthode DelPersonnel du contrôleur.
+        /// Après confirmation, appelle la méthode DelPersonnel du contrôleur en lui envoyant on objet du type Personnel,
+        /// représentant le membre du personnel à supprimer, et rafraîchit ensuite la liste du personnel.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

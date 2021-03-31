@@ -131,7 +131,6 @@ namespace MediaTek86.controleur
         public void FermerAbsences()
         {
             frmAbsences.Hide();
-
         }
 
         /// <summary>
@@ -143,7 +142,6 @@ namespace MediaTek86.controleur
             frmAbsences.RemplirListeAbsences(personnelAbsence);
             frmAMAbsences.InitialiserLesChamps();
             frmAMAbsences.Hide();
-            
         }
 
         public void AjouterAbsence(Personnel personnelAbsence)
@@ -151,7 +149,6 @@ namespace MediaTek86.controleur
             frmAMAbsences.Text = "Ajouter absence";
             frmAMAbsences.PersonnelAbsence = personnelAbsence;
             frmAMAbsences.ShowDialog();
-
         }
 
         /// <summary>
@@ -185,10 +182,27 @@ namespace MediaTek86.controleur
             FermerAMPersonnel();
         }
 
+        /// <summary>
+        /// Méthode qui appelle la méthode AddAbsence de la classe AccesDonnees pour l'ajout d'une nouvelle absence.
+        /// Appelle ensuite la méthode FermerAMAbsences pour fermer la vue.
+        /// </summary>
+        /// <param name="absence">Instance de la classe Absence qui représente la nouvelle absence.</param>
+        /// <param name="personnelAbsence">Instance de la classe Personnel qui représente le membre du personnel pour lequel on veut ajouter une absence. La variable et utilisé ensuite
+        /// comme paramètre dans la méthode FermerAMAbsences afin de mettre à jour l'affichage des absences de ce membre du personnel.</param>
         public void AddAbsence(Absence absence, Personnel personnelAbsence)
         {
             AccesDonnees.AddAbsence(absence);
             FermerAMAbsences(personnelAbsence);
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode DelAbsence de la classe AccesDonnees pour la suppression d'une absence.
+        /// </summary>
+        /// <param name="absence">Instance de la classe Absence qui représente l'absence à supprimer.</param>
+        /// <param name="personnelAbsence">Instance de la classe Personnel qui représente le membre du personnel pour lequel on veut supprimer une absence.</param>
+        public void DelAbsence(Absence absence, Personnel personnelAbsence)
+        {
+            AccesDonnees.DelAbsence(absence, personnelAbsence);
         }
     }
 }

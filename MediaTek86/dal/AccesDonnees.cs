@@ -158,9 +158,7 @@ namespace MediaTek86.dal
         /// </summary>
         /// <param name="absence">Objet de type Absence, correspondant à la nouvelle absence.</param>
         public static void AddAbsence(Absence absence)
-        {
-            Console.WriteLine(absence.DateDebut);
-            
+        {            
             string req = "insert into absence(idpersonnel, datedebut, idmotif, datefin) ";
             req += "values(@idpersonnel, @datedebut, @idmotif, @datefin);";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -168,6 +166,23 @@ namespace MediaTek86.dal
             parameters.Add("@datedebut", absence.DateDebut);
             parameters.Add("@idmotif", absence.IdMotif);
             parameters.Add("@datefin", absence.DateFin);
+            ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
+            connection.ReqUpdate(req, parameters);
+            connection.Close();
+        }
+
+        /// <summary>
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour supprimer une absence de la base de données.
+        /// </summary>
+        /// <param name="absence">Objet de type absence, correspondant à l'absence qu'on veut supprimer.</param>
+        /// <param name="personnelAbsence">Objet de type Personnel qui représente le membre du personnel pour lequel on veut supprimer l'absence.</param>
+        public static void DelAbsence(Absence absence, Personnel personnelAbsence) 
+        {
+            string dateDebut = DateTime.Parse(absence.DateDebut).ToString("yyyy-MM-dd");
+            string req = "delete from absence where idpersonnel = @idpersonnel and DATE(datedebut) = @datedebut;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnelAbsence.IdPersonnel);
+            parameters.Add("@datedebut", dateDebut);
             ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
             connection.ReqUpdate(req, parameters);
             connection.Close();

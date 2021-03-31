@@ -74,6 +74,7 @@ namespace MediaTek86.vue
             this.btnSuppAbsence.TabIndex = 3;
             this.btnSuppAbsence.Text = "Supprimer absence";
             this.btnSuppAbsence.UseVisualStyleBackColor = true;
+            this.btnSuppAbsence.Click += new System.EventHandler(this.btnSuppAbsence_Click);
             // 
             // btnRetourPersonnel
             // 

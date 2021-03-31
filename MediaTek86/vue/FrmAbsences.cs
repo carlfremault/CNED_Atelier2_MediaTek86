@@ -81,5 +81,31 @@ namespace MediaTek86.vue
         {
             controle.AjouterAbsence(personnelAbsence);
         }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Supprimer absence'.
+        /// Vérifie si une absence a été sélectionnée.
+        /// Demande confirmation de suppression.
+        /// Après confirmation, appelle la méthode DelAbsence du contrôleur en lui envoyant l'absence à supprimer ainsi que
+        /// un objet de type Personnel qui représente le membre du personnel pour lequel on veut supprimer l'absence, et rafraîchit ensuite la liste des absences.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSuppAbsence_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                if (MessageBox.Show("Confirmez-vous la suppression de l'absence de la liste?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.DelAbsence(absence, personnelAbsence);
+                    RemplirListeAbsences(personnelAbsence);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une absence.", "Information");
+            }
+        }
     }
 }
