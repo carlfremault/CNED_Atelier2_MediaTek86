@@ -82,6 +82,7 @@ namespace MediaTek86.vue
             this.btnRetourPersonnel.TabIndex = 4;
             this.btnRetourPersonnel.Text = "Retour liste personnel";
             this.btnRetourPersonnel.UseVisualStyleBackColor = true;
+            this.btnRetourPersonnel.Click += new System.EventHandler(this.btnRetourPersonnel_Click);
             // 
             // FrmAbsences
             // 

@@ -57,6 +57,31 @@ namespace MediaTek86.dal
         }
 
         /// <summary>
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour récupérer une liste d'objets du type Absence, correspondant aux différents absences enregistrés dans la base de données pour un membre du personnel.
+        /// </summary>
+        /// <param name="personnel">Objet du type Personnel qui représente le membre du personnel dont on veut afficher les absences.</param>
+        /// <returns>La liste d'absences du membre du personnel passé en entrée.</returns>
+        public static List<Absence> GetLesAbsences(Personnel personnel)
+        {
+            List<Absence> lesAbsences = new List<Absence>();
+            string req = "select a.datedebut, a.idmotif, m.libelle as 'motif', a.datefin from absence a join motif m on a.idmotif = m.idmotif ";
+            req+= "where idpersonnel = @idpersonnel order by datedebut desc;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnel.IdPersonnel);
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, parameters);
+            while(curseur.Read())
+            {
+                string dateDebut = ((DateTime)curseur.Field("datedebut")).ToString("dd/MM/yyyy");
+                string dateFin = ((DateTime)curseur.Field("datefin")).ToString("dd/MM/yyyy");
+                Absence absence = new Absence((int)personnel.IdPersonnel, dateDebut, (string)curseur.Field("motif"), dateFin);
+                lesAbsences.Add(absence);
+            }
+            curseur.Close();
+            return lesAbsences;
+        }
+
+        /// <summary>
         /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour ajouter un nouveau membre du personnel dans la base de données.
         /// </summary>
         /// <param name="personnel">Objet de type Personnel, correspondant au nouveau membre du personnel.</param>

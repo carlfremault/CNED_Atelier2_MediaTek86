@@ -104,5 +104,25 @@ namespace MediaTek86.vue
                 MessageBox.Show("Veuillez sélectionner un membre du personnel.", "Information");
             }
         }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Afficher absences'.
+        /// Vérifie si un membre du personnel a été selectionné.
+        /// Recupèr cet objet et l'envoie à la méthode AfficherAbsences du contrôleur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAffichAbsences_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnel.SelectedRows.Count > 0)
+            {
+                Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                controle.AfficherAbsences(personnel);
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un membre du personnel.", "Information");
+            }
+        }
     }
 }

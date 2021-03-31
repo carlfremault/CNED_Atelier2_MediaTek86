@@ -24,13 +24,19 @@ namespace MediaTek86.controleur
         FrmAMPersonnel frmAMPersonnel;
 
         /// <summary>
+        /// Instance de la vue FrmAbsences.
+        /// </summary>
+        FrmAbsences frmAbsences;
+
+        /// <summary>
         /// Constructeur de la classe.
-        /// Crée des instances des vues FrmPersonnel et FrmAMPersonnel.
+        /// Crée des instances des vues FrmPersonnel, FrmAMPersonnel, et FrmAbsences.
         /// </summary>
         public Controle()
         {
             frmPersonnel = new FrmPersonnel(this);
             frmAMPersonnel = new FrmAMPersonnel(this);
+            frmAbsences = new FrmAbsences(this);
             frmPersonnel.ShowDialog();
         }
 
@@ -50,6 +56,16 @@ namespace MediaTek86.controleur
         public List<Service> GetLesServices()
         {
             return AccesDonnees.GetLesServices();
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode GetLesAbsences de la classe AccesDonnees et retourne une liste d'absences d'un membre du personnel.
+        /// </summary>
+        /// <param name="personnel">Objet du type Personnel qui représente le membre du personnel dont on veut afficher les absences.</param>
+        /// <returns></returns>
+        public List<Absence> GetLesAbsences(Personnel personnel)
+        {
+            return AccesDonnees.GetLesAbsences(personnel);
         }
 
         /// <summary>
@@ -80,6 +96,26 @@ namespace MediaTek86.controleur
             frmAMPersonnel.ViderLesChamps();
             frmAMPersonnel.Hide();
             frmPersonnel.RemplirListePersonnel();
+        }
+
+        /// <summary>
+        /// Méthode qui ferme la vue FrmAbsences.
+        /// </summary>
+        public void FermerAbsences()
+        {
+            frmAbsences.Hide();
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode RemplirAbsences de la classe FrmAbsences pour afficher la liste des absences d'un membre du personnel.
+        /// Ouvre ensuite la vue FrmAbsences.
+        /// </summary>
+        /// <param name="personnel">Objet du type Personnel qui représente le membre du personnel dont on veut afficher les absences.</param>
+        public void AfficherAbsences(Personnel personnel)
+        {
+            frmAbsences.RemplirListeAbsences(personnel);
+            frmAbsences.Text = "MediaTek86 - Absences " + personnel.Prenom + " " + personnel.Nom;
+            frmAbsences.ShowDialog();
         }
 
         /// <summary>

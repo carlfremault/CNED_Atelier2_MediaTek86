@@ -75,6 +75,7 @@ namespace MediaTek86.vue
             this.btnAffichAbsences.TabIndex = 3;
             this.btnAffichAbsences.Text = "Afficher absences";
             this.btnAffichAbsences.UseVisualStyleBackColor = true;
+            this.btnAffichAbsences.Click += new System.EventHandler(this.btnAffichAbsences_Click);
             // 
             // dgvPersonnel
             // 

@@ -44,21 +44,13 @@ namespace MediaTek86.vue
         {
             InitializeComponent();
             this.controle = controle;
-            Init();
-        }
-
-        /// <summary>
-        /// Méthode qui gère l'initialisation de la vue.
-        /// </summary>
-        public void Init()
-        {
-            remplirServices();
+            RemplirServices();
         }
 
         /// <summary>
         /// Méthode qui remplit la combobox des services et sélectionne la première entrée.
         /// </summary>
-        public void remplirServices()
+        public void RemplirServices()
         {
             List<Service> lesServices = controle.GetLesServices();
             bdgServices.DataSource = lesServices;
@@ -117,6 +109,10 @@ namespace MediaTek86.vue
                     {
                         controle.UpdatePersonnel(personnelAModifier);
                         modification = false;
+                    }
+                    else
+                    {
+                        controle.FermerAMPersonnel();
                     }
                 }
                 else
