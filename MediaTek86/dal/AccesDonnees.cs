@@ -64,7 +64,7 @@ namespace MediaTek86.dal
         public static List<Absence> GetLesAbsences(Personnel personnel)
         {
             List<Absence> lesAbsences = new List<Absence>();
-            string req = "select a.datedebut, a.idmotif, m.libelle as 'motif', a.datefin from absence a join motif m on a.idmotif = m.idmotif ";
+            string req = "select a.datedebut, a.idmotif as 'idmotif', m.libelle as 'motif', a.datefin from absence a join motif m on a.idmotif = m.idmotif ";
             req+= "where idpersonnel = @idpersonnel order by datedebut desc;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", personnel.IdPersonnel);
@@ -74,11 +74,29 @@ namespace MediaTek86.dal
             {
                 string dateDebut = ((DateTime)curseur.Field("datedebut")).ToString("dd/MM/yyyy");
                 string dateFin = ((DateTime)curseur.Field("datefin")).ToString("dd/MM/yyyy");
-                Absence absence = new Absence((int)personnel.IdPersonnel, dateDebut, (string)curseur.Field("motif"), dateFin);
-                lesAbsences.Add(absence);
+                Absence absence = new Absence((int)personnel.IdPersonnel, dateDebut, (int)curseur.Field("idmotif"), (string)curseur.Field("motif"), dateFin);                lesAbsences.Add(absence);
             }
             curseur.Close();
             return lesAbsences;
+        }
+
+        /// <summary>
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour récupérer une liste d'objets du type Motif, correspondant aux différents motifs d'absence enregistrés dans la base de données.
+        /// </summary>
+        /// <returns>Une liste d'objets du type Motif.</returns>
+        public static List<Motif> GetLesMotifs ()
+        {
+            List<Motif> lesMotifs = new List<Motif>();
+            string req = "select * from motif order by idmotif";
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, null);
+            while (curseur.Read())
+            {
+                Motif motif = new Motif((int)curseur.Field("idmotif"), (string)curseur.Field("libelle"));
+                lesMotifs.Add(motif);
+            }
+            curseur.Close();
+            return lesMotifs;
         }
 
         /// <summary>
@@ -130,6 +148,26 @@ namespace MediaTek86.dal
             parameters.Add("@prenom", personnel.Prenom);
             parameters.Add("@tel", personnel.Tel);
             parameters.Add("@mail", personnel.Mail);
+            ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
+            connection.ReqUpdate(req, parameters);
+            connection.Close();
+        }
+
+        /// <summary>
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour ajouter une nouvelle absence dans la base de données.
+        /// </summary>
+        /// <param name="absence">Objet de type Absence, correspondant à la nouvelle absence.</param>
+        public static void AddAbsence(Absence absence)
+        {
+            Console.WriteLine(absence.DateDebut);
+            
+            string req = "insert into absence(idpersonnel, datedebut, idmotif, datefin) ";
+            req += "values(@idpersonnel, @datedebut, @idmotif, @datefin);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", absence.IdPersonnel);
+            parameters.Add("@datedebut", absence.DateDebut);
+            parameters.Add("@idmotif", absence.IdMotif);
+            parameters.Add("@datefin", absence.DateFin);
             ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
             connection.ReqUpdate(req, parameters);
             connection.Close();

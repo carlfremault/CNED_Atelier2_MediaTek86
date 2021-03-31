@@ -20,7 +20,11 @@ namespace MediaTek86.modele
         /// </summary>
         private string dateDebut;
         /// <summary>
-        /// motif de la table 'absence'
+        /// idmotif de la table 'absence'
+        /// </summary>
+        private int  idMotif;
+        /// <summary>
+        /// libelle motif de la table 'motif'
         /// </summary>
         private string motif;
         /// <summary>
@@ -29,16 +33,18 @@ namespace MediaTek86.modele
         private string dateFin;
 
         /// <summary>
-        /// Constructeur, valorise les propriétés.
+        /// Constructeur, valorise les propriétés
         /// </summary>
         /// <param name="idPersonnel">idPersonnel du membre du personnel.</param>
         /// <param name="dateDebut">La date de début de l'absence.</param>
-        /// <param name="motif">Le motif de l'absence.</param>
+        /// <param name="idMotif">idMotif de l'absence.</param>
+        /// <param name="motif">Libellé motif de l'absence.</param>
         /// <param name="dateFin">La date de fin de l'absence.</param>
-        public Absence(int idPersonnel, string dateDebut, string motif, string dateFin)
+        public Absence(int idPersonnel, string dateDebut, int idMotif, string motif, string dateFin)
         {
             this.idPersonnel = idPersonnel;
             this.dateDebut = dateDebut;
+            this.idMotif = idMotif;
             this.motif = motif;
             this.dateFin = dateFin;
         }
@@ -54,10 +60,14 @@ namespace MediaTek86.modele
         /// <summary>
         /// Encapsulation du champ motif. Permet l'utilisation du 'getter' en lien avec le DataGridView.
         /// </summary>
-        public string Motif { get => motif; }
+        public int IdMotif { get => idMotif; }
         /// <summary>
         /// Encapsulation du champ dateFin. Permet l'utilisation du 'getter' en lien avec le DataGridView.
         /// </summary>
         public string DateFin { get => dateFin; }
+        /// <summary>
+        /// Encapsulation du champ motif. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// </summary>
+        public string Motif { get => motif; }
     }
 }

@@ -96,6 +96,7 @@ namespace MediaTek86.vue
             this.btnEnregistrer.TabIndex = 6;
             this.btnEnregistrer.Text = "Enregistrer";
             this.btnEnregistrer.UseVisualStyleBackColor = true;
+            this.btnEnregistrer.Click += new System.EventHandler(this.btnEnregistrer_Click);
             // 
             // btnAnnuler
             // 
@@ -105,6 +106,7 @@ namespace MediaTek86.vue
             this.btnAnnuler.TabIndex = 7;
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
+            this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
             // 
             // FrmAMAbsences
             // 

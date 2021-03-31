@@ -29,14 +29,20 @@ namespace MediaTek86.controleur
         FrmAbsences frmAbsences;
 
         /// <summary>
+        /// Instance de la vue FrmAMAbsances
+        /// </summary>
+        FrmAMAbsences frmAMAbsences;
+
+        /// <summary>
         /// Constructeur de la classe.
-        /// Crée des instances des vues FrmPersonnel, FrmAMPersonnel, et FrmAbsences.
+        /// Crée des instances des vues FrmPersonnel, FrmAMPersonnel, FrmAbsences et FrmAMAbsences.
         /// </summary>
         public Controle()
         {
             frmPersonnel = new FrmPersonnel(this);
             frmAMPersonnel = new FrmAMPersonnel(this);
             frmAbsences = new FrmAbsences(this);
+            frmAMAbsences = new FrmAMAbsences(this);
             frmPersonnel.ShowDialog();
         }
 
@@ -52,7 +58,7 @@ namespace MediaTek86.controleur
         /// <summary>
         /// Méthode qui appelle la méthode GetLesServices de la classe AccesDonnees et retourne une liste d'objets du type Service.
         /// </summary>
-        /// <returns>Une liste d'objets du type Service.</returns>
+        /// <returns>Une liste d'objets du type Service qui représentent les services enrégistrés dans la base de données.</returns>
         public List<Service> GetLesServices()
         {
             return AccesDonnees.GetLesServices();
@@ -66,6 +72,15 @@ namespace MediaTek86.controleur
         public List<Absence> GetLesAbsences(Personnel personnel)
         {
             return AccesDonnees.GetLesAbsences(personnel);
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode GetLesMotifs de la classe AccesDonnees et retourne une liste d'objets du type Motif.
+        /// </summary>
+        /// <returns>Une liste d'objets du type Motif qui représentent les motifs d'absence enrégistrés dans la base de données.</returns>
+        public List<Motif> GetLesMotifs()
+        {
+            return AccesDonnees.GetLesMotifs();
         }
 
         /// <summary>
@@ -99,14 +114,6 @@ namespace MediaTek86.controleur
         }
 
         /// <summary>
-        /// Méthode qui ferme la vue FrmAbsences.
-        /// </summary>
-        public void FermerAbsences()
-        {
-            frmAbsences.Hide();
-        }
-
-        /// <summary>
         /// Méthode qui appelle la méthode RemplirAbsences de la classe FrmAbsences pour afficher la liste des absences d'un membre du personnel.
         /// Ouvre ensuite la vue FrmAbsences.
         /// </summary>
@@ -116,6 +123,35 @@ namespace MediaTek86.controleur
             frmAbsences.RemplirListeAbsences(personnel);
             frmAbsences.Text = "MediaTek86 - Absences " + personnel.Prenom + " " + personnel.Nom;
             frmAbsences.ShowDialog();
+        }
+
+        /// <summary>
+        /// Méthode qui ferme la vue FrmAbsences.
+        /// </summary>
+        public void FermerAbsences()
+        {
+            frmAbsences.Hide();
+
+        }
+
+        /// <summary>
+        /// Méthode qui ferme la vue FrmAMAbsences et rafraîchit les absences affichées dans la vue FrmAbsences.
+        /// </summary>
+        /// <param name="personnelAbsence"></param>
+        public void FermerAMAbsences(Personnel personnelAbsence)
+        {
+            frmAbsences.RemplirListeAbsences(personnelAbsence);
+            frmAMAbsences.InitialiserLesChamps();
+            frmAMAbsences.Hide();
+            
+        }
+
+        public void AjouterAbsence(Personnel personnelAbsence)
+        {
+            frmAMAbsences.Text = "Ajouter absence";
+            frmAMAbsences.PersonnelAbsence = personnelAbsence;
+            frmAMAbsences.ShowDialog();
+
         }
 
         /// <summary>
@@ -147,6 +183,12 @@ namespace MediaTek86.controleur
         {
             AccesDonnees.UpdatePersonnel(personnel);
             FermerAMPersonnel();
+        }
+
+        public void AddAbsence(Absence absence, Personnel personnelAbsence)
+        {
+            AccesDonnees.AddAbsence(absence);
+            FermerAMAbsences(personnelAbsence);
         }
     }
 }

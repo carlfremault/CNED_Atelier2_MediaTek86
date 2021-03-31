@@ -33,6 +33,7 @@ namespace MediaTek86.vue
         public FrmPersonnel(Controle controle)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.controle = controle;
             RemplirListePersonnel();
         }
@@ -108,7 +109,7 @@ namespace MediaTek86.vue
         /// <summary>
         /// Méthode évenementielle après un clic sur le bouton 'Afficher absences'.
         /// Vérifie si un membre du personnel a été selectionné.
-        /// Recupèr cet objet et l'envoie à la méthode AfficherAbsences du contrôleur.
+        /// Recupère cet objet et l'envoie à la méthode AfficherAbsences du contrôleur.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

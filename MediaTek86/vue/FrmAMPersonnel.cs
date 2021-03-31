@@ -43,6 +43,7 @@ namespace MediaTek86.vue
         public FrmAMPersonnel(Controle controle)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
             this.controle = controle;
             RemplirServices();
         }
@@ -62,7 +63,8 @@ namespace MediaTek86.vue
         }
 
         /// <summary>
-        /// Méthode évenementielle qui ferme la vue après un clic sur le bouton 'Annuler'.
+        /// Méthode évenementielle après un clic sur le bouton 'Annuler'.
+        /// Appelle la méthode FermerAMPersonnel de la classe Controle.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
