@@ -1,4 +1,9 @@
-﻿namespace MediaTek86.modele
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+namespace MediaTek86.modele
 {
     /// <summary>
     /// Classe métier qui represente la table 'absence' de la base de données.

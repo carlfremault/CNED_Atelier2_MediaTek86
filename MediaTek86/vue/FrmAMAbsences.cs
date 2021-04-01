@@ -1,4 +1,9 @@
-﻿using MediaTek86.controleur;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MediaTek86.controleur;
 using MediaTek86.modele;
 using System;
 using System.Windows.Forms;
@@ -103,7 +108,8 @@ namespace MediaTek86.vue
         {
             if (!dtpDebut.Value.Equals("") && !dtpFin.Value.Equals("") && cboMotif.SelectedIndex != -1)
             {
-                if (dtpDebut.Value < dtpFin.Value) { 
+                if (dtpDebut.Value.Date <= dtpFin.Value.Date)
+                { 
                     Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
                     Absence nouvelleAbsence = new Absence((int)personnelAbsence.IdPersonnel, ((DateTime)dtpDebut.Value).ToString("yyyy-MM-dd"), (int)motif.IdMotif, (string)motif.Libelle, ((DateTime)dtpFin.Value).ToString("yyyy-MM-dd"));
                     if (modificationAbsence)

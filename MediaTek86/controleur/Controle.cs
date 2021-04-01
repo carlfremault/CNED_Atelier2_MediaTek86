@@ -1,4 +1,9 @@
-﻿using MediaTek86.dal;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MediaTek86.dal;
 using MediaTek86.modele;
 using MediaTek86.vue;
 using System.Collections.Generic;
@@ -30,6 +35,11 @@ namespace MediaTek86.controleur
         FrmAMAbsences frmAMAbsences;
 
         /// <summary>
+        /// Instance de la vue FrmAuthentification
+        /// </summary>
+        FrmAuthentification frmAuthentification;
+
+        /// <summary>
         /// Constructeur de la classe.
         /// Crée des instances des vues FrmPersonnel, FrmAMPersonnel, FrmAbsences et FrmAMAbsences.
         /// </summary>
@@ -39,7 +49,30 @@ namespace MediaTek86.controleur
             frmAMPersonnel = new FrmAMPersonnel(this);
             frmAbsences = new FrmAbsences(this);
             frmAMAbsences = new FrmAMAbsences(this);
-            frmPersonnel.ShowDialog();
+            frmAuthentification = new FrmAuthentification(this);
+            frmAuthentification.ShowDialog();
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode VerifierAuthentification de la classe AccesDonnees et lui envoie le nom d'utilisateur
+        /// et le mot de passe saisis par l'utilisateur.
+        /// Ouvre l'application si la méthode VerifierAuthentification de la classe AccesDonnees retourne 'vrai'.
+        /// </summary>
+        /// <param name="utilisateur">Le nom d'utilisateur saisi par l'utilisateur dans la vue FrmAuthentification.</param>
+        /// <param name="motdepasse">Le mot de passe saisi par l'utilisateur dans la vue FrmAuthentification.</param>
+        /// <returns>Un booléen qui est 'vrai si la méthode VerifierAuthentification de la classe AccesDonnees retourne 'vrai', 'faux' si le retour est 'faux'.</returns>
+        public bool VerifierAuthentification(string utilisateur, string motdepasse)
+        {
+            if (AccesDonnees.VerifierAuthentification(utilisateur, motdepasse))
+            {
+                frmAuthentification.Hide();
+                frmPersonnel.ShowDialog();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -100,6 +133,37 @@ namespace MediaTek86.controleur
         }
 
         /// <summary>
+        /// Méthode qui appelle la méthode AddPersonnel de la classe AccesDonnees pour l'ajout d'un nouveau membre du personnel.
+        /// Appelle ensuite la méthode FermerAMPersonnel pour fermer la vue.
+        /// </summary>
+        /// <param name="personnel">Instance de la classe Personnel qui représente le nouveau membre du personnel.</param>
+        public void AddPersonnel(Personnel personnel)
+        {
+            AccesDonnees.AddPersonnel(personnel);
+            FermerAMPersonnel();
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode DelPersonnel de la classe AccesDonnees pour la suppression d'un membre du personnel.
+        /// </summary>
+        /// <param name="personnel">Instance de la classe Personnel qui représente le membre du personnel à supprimer.</param>
+        public void DelPersonnel(Personnel personnel)
+        {
+            AccesDonnees.DelPersonnel(personnel);
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode UpdatePersonnel de la classe AccesDonnees pour modifier un membre du personnel.
+        /// Appelle ensuite la méthode FermerAMPersonnel pour fermer la vue.
+        /// </summary>
+        /// <param name="personnel">Instance de la classe Personnel qui représente le membre du personnel à modifier.</param>
+        public void UpdatePersonnel(Personnel personnel)
+        {
+            AccesDonnees.UpdatePersonnel(personnel);
+            FermerAMPersonnel();
+        }
+
+        /// <summary>
         /// Méthode qui ferme la vue FrmAMPersonnel et rafraîchit la liste du personnel.
         /// </summary>
         public void FermerAMPersonnel()
@@ -152,34 +216,16 @@ namespace MediaTek86.controleur
         }
 
         /// <summary>
-        /// Méthode qui appelle la méthode AddPersonnel de la classe AccesDonnees pour l'ajout d'un nouveau membre du personnel.
-        /// Appelle ensuite la méthode FermerAMPersonnel pour fermer la vue.
+        /// Méthode qui appelle la méthode ModifierAbsence de la vue FrmAMAbsences en lui envoyant l'absence à modifier et le personnel concerné.
+        /// Ouvre ensuite la vue FrmAMAbsences.
         /// </summary>
-        /// <param name="personnel">Instance de la classe Personnel qui représente le nouveau membre du personnel.</param>
-        public void AddPersonnel(Personnel personnel)
+        /// <param name="absence">Objet de type Absence qui représente l'absence à modifier.</param>
+        /// <param name="personnel">Objet de type Personnel qui représente le membre du personnel dont on modifie une absence.</param>
+        public void ModifierAbsence(Absence absence, Personnel personnel)
         {
-            AccesDonnees.AddPersonnel(personnel);
-            FermerAMPersonnel();
-        }
-
-        /// <summary>
-        /// Méthode qui appelle la méthode DelPersonnel de la classe AccesDonnees pour la suppression d'un membre du personnel.
-        /// </summary>
-        /// <param name="personnel">Instance de la classe Personnel qui représente le membre du personnel à supprimer.</param>
-        public void DelPersonnel(Personnel personnel)
-        {
-            AccesDonnees.DelPersonnel(personnel);
-        }
-
-        /// <summary>
-        /// Méthode qui appelle la méthode UpdatePersonnel de la classe AccesDonnees pour modifier un membre du personnel.
-        /// Appelle ensuite la méthode FermerAMPersonnel pour fermer la vue.
-        /// </summary>
-        /// <param name="personnel">Instance de la classe Personnel qui représente le membre du personnel à modifier.</param>
-        public void UpdatePersonnel(Personnel personnel)
-        {
-            AccesDonnees.UpdatePersonnel(personnel);
-            FermerAMPersonnel();
+            frmAMAbsences.Text = "Modifier absence";
+            frmAMAbsences.ModifierAbsence(absence, personnel);
+            frmAMAbsences.ShowDialog();
         }
 
         /// <summary>
@@ -203,19 +249,6 @@ namespace MediaTek86.controleur
         public void DelAbsence(Absence absence, Personnel personnelAbsence)
         {
             AccesDonnees.DelAbsence(absence, personnelAbsence);
-        }
-
-        /// <summary>
-        /// Méthode qui appelle la méthode ModifierAbsence de la vue FrmAMAbsences en lui envoyant l'absence à modifier et le personnel concerné.
-        /// Ouvre ensuite la vue FrmAMAbsences.
-        /// </summary>
-        /// <param name="absence">Objet de type Absence qui représente l'absence à modifier.</param>
-        /// <param name="personnel">Objet de type Personnel qui représente le membre du personnel dont on modifie une absence.</param>
-        public void ModifierAbsence(Absence absence, Personnel personnel)
-        {
-            frmAMAbsences.Text = "Modifier absence";
-            frmAMAbsences.ModifierAbsence(absence, personnel);   
-            frmAMAbsences.ShowDialog();
         }
 
         /// <summary>
