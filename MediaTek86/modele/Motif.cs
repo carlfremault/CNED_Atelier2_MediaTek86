@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaTek86.modele
+﻿namespace MediaTek86.modele
 {
     /// <summary>
     /// Classe métier qui represente la table 'motif' de la base de données.
@@ -41,7 +35,7 @@ namespace MediaTek86.modele
         public string Libelle { get => libelle; }
 
         /// <summary>
-        /// Méthode qui retourne la propriété 'libelle' de la classe pour insertion dans la combobox.
+        /// Redéfinition de la méthode ToString qui retourne la propriété 'libelle' de la classe pour insertion dans la combobox.
         /// </summary>
         /// <returns>Le libellé du motif.</returns>
         public override string ToString()

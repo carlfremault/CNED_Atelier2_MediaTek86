@@ -2,12 +2,6 @@
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaTek86.vue
@@ -33,6 +27,7 @@ namespace MediaTek86.vue
         public FrmPersonnel(Controle controle)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.controle = controle;
             RemplirListePersonnel();
         }
@@ -64,7 +59,8 @@ namespace MediaTek86.vue
         /// Méthode évenementielle après un clic sur le bouton 'Supprimer personnel'.
         /// Vérifie si un membre du personnel a été sélectionné.
         /// Demande confirmation de suppression.
-        /// Après confirmation, appelle la méthode DelPersonnel du contrôleur.
+        /// Après confirmation, appelle la méthode DelPersonnel du contrôleur en lui envoyant on objet du type Personnel,
+        /// représentant le membre du personnel à supprimer, et rafraîchit ensuite la liste du personnel.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,6 +94,26 @@ namespace MediaTek86.vue
             {
                 Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
                 controle.ModifierPersonnel(personnel);
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un membre du personnel.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Afficher absences'.
+        /// Vérifie si un membre du personnel a été selectionné.
+        /// Recupère cet objet et l'envoie à la méthode AfficherAbsences du contrôleur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAffichAbsences_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnel.SelectedRows.Count > 0)
+            {
+                Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                controle.AfficherAbsences(personnel);
             }
             else
             {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaTek86.modele
+﻿namespace MediaTek86.modele
 {
     /// <summary>
     /// Classe métier qui represente la table 'service' de la base de données.
@@ -41,7 +35,7 @@ namespace MediaTek86.modele
         public string Nom { get => nom; }
 
         /// <summary>
-        /// Méthode qui retourne la propriété 'nom' de la classe pour insertion dans la combobox.
+        /// Redéfinition de la méthode ToString qui retourne la propriété 'nom' de la classe pour insertion dans la combobox.
         /// </summary>
         /// <returns>Le nom du service.</returns>
         public override string ToString()

@@ -2,12 +2,6 @@
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaTek86.vue
@@ -38,27 +32,20 @@ namespace MediaTek86.vue
         private Personnel personnelAModifier;
 
         /// <summary>
-        /// Constructeur de la classe.
+        /// Constructeur de la classe. Appelle la méthode RemplirServices pour remplir la combobox des services.
         /// </summary>
         public FrmAMPersonnel(Controle controle)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
             this.controle = controle;
-            Init();
-        }
-
-        /// <summary>
-        /// Méthode qui gère l'initialisation de la vue.
-        /// </summary>
-        public void Init()
-        {
-            remplirServices();
+            RemplirServices();
         }
 
         /// <summary>
         /// Méthode qui remplit la combobox des services et sélectionne la première entrée.
         /// </summary>
-        public void remplirServices()
+        public void RemplirServices()
         {
             List<Service> lesServices = controle.GetLesServices();
             bdgServices.DataSource = lesServices;
@@ -70,7 +57,8 @@ namespace MediaTek86.vue
         }
 
         /// <summary>
-        /// Méthode évenementielle qui ferme la vue après un clic sur le bouton 'Annuler'.
+        /// Méthode évenementielle après un clic sur le bouton 'Annuler'.
+        /// Appelle la méthode FermerAMPersonnel de la classe Controle.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -113,10 +101,15 @@ namespace MediaTek86.vue
                     personnelAModifier.Mail = txtMail.Text;
                     personnelAModifier.IdService = leService.IdService;
                     personnelAModifier.Service = leService.Nom;
-                    if (MessageBox.Show("Confirmez-vous la modification?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                    if (MessageBox.Show("Souhaitez-vous confirmer la modification?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         controle.UpdatePersonnel(personnelAModifier);
                         modification = false;
+                    }
+                    else
+                    {
+                        controle.FermerAMPersonnel();
                     }
                 }
                 else

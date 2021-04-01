@@ -55,6 +55,7 @@ namespace MediaTek86.vue
             this.btnAjoutAbsence.TabIndex = 1;
             this.btnAjoutAbsence.Text = "Ajouter absence";
             this.btnAjoutAbsence.UseVisualStyleBackColor = true;
+            this.btnAjoutAbsence.Click += new System.EventHandler(this.btnAjoutAbsence_Click);
             // 
             // btnModifAbsence
             // 
@@ -64,6 +65,7 @@ namespace MediaTek86.vue
             this.btnModifAbsence.TabIndex = 2;
             this.btnModifAbsence.Text = "Modifier absence";
             this.btnModifAbsence.UseVisualStyleBackColor = true;
+            this.btnModifAbsence.Click += new System.EventHandler(this.btnModifAbsence_Click);
             // 
             // btnSuppAbsence
             // 
@@ -73,6 +75,7 @@ namespace MediaTek86.vue
             this.btnSuppAbsence.TabIndex = 3;
             this.btnSuppAbsence.Text = "Supprimer absence";
             this.btnSuppAbsence.UseVisualStyleBackColor = true;
+            this.btnSuppAbsence.Click += new System.EventHandler(this.btnSuppAbsence_Click);
             // 
             // btnRetourPersonnel
             // 
@@ -82,6 +85,7 @@ namespace MediaTek86.vue
             this.btnRetourPersonnel.TabIndex = 4;
             this.btnRetourPersonnel.Text = "Retour liste personnel";
             this.btnRetourPersonnel.UseVisualStyleBackColor = true;
+            this.btnRetourPersonnel.Click += new System.EventHandler(this.btnRetourPersonnel_Click);
             // 
             // FrmAbsences
             // 
