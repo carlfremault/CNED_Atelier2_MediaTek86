@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaTek86.modele
+﻿namespace MediaTek86.modele
 {
     /// <summary>
     /// Classe métier qui represente la table 'absence' de la base de données.
@@ -50,24 +44,24 @@ namespace MediaTek86.modele
         }
 
         /// <summary>
-        /// Encapsulation du champ idPersonnel. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ idPersonnel. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public int IdPersonnel { get => idPersonnel; }
+        public int IdPersonnel { get => idPersonnel; set => idPersonnel = value;  }
         /// <summary>
-        /// Encapsulation du champ dateDebut. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ dateDebut. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string DateDebut { get => dateDebut; }
+        public string DateDebut { get => dateDebut; set => dateDebut = value;  }
         /// <summary>
-        /// Encapsulation du champ motif. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ motif. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public int IdMotif { get => idMotif; }
+        public int IdMotif { get => idMotif; set => idMotif = value; }
         /// <summary>
-        /// Encapsulation du champ dateFin. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ dateFin. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string DateFin { get => dateFin; }
+        public string DateFin { get => dateFin; set => dateFin = value; }
         /// <summary>
-        /// Encapsulation du champ motif. Permet l'utilisation du 'getter' en lien avec le DataGridView.
+        /// Encapsulation du champ motif. Permet l'utilisation du 'getter' et 'setter' en lien avec le DataGridView.
         /// </summary>
-        public string Motif { get => motif; }
+        public string Motif { get => motif; set => motif = value; }
     }
 }

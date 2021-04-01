@@ -2,12 +2,6 @@
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaTek86.vue
@@ -38,7 +32,7 @@ namespace MediaTek86.vue
         private Personnel personnelAModifier;
 
         /// <summary>
-        /// Constructeur de la classe.
+        /// Constructeur de la classe. Appelle la méthode RemplirServices pour remplir la combobox des services.
         /// </summary>
         public FrmAMPersonnel(Controle controle)
         {
@@ -107,7 +101,8 @@ namespace MediaTek86.vue
                     personnelAModifier.Mail = txtMail.Text;
                     personnelAModifier.IdService = leService.IdService;
                     personnelAModifier.Service = leService.Nom;
-                    if (MessageBox.Show("Confirmez-vous la modification?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                    if (MessageBox.Show("Souhaitez-vous confirmer la modification?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         controle.UpdatePersonnel(personnelAModifier);
                         modification = false;

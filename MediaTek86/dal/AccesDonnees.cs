@@ -2,9 +2,6 @@
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaTek86.dal
 {
@@ -158,7 +155,7 @@ namespace MediaTek86.dal
         /// </summary>
         /// <param name="absence">Objet de type Absence, correspondant à la nouvelle absence.</param>
         public static void AddAbsence(Absence absence)
-        {            
+        {
             string req = "insert into absence(idpersonnel, datedebut, idmotif, datefin) ";
             req += "values(@idpersonnel, @datedebut, @idmotif, @datefin);";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -183,6 +180,27 @@ namespace MediaTek86.dal
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", personnelAbsence.IdPersonnel);
             parameters.Add("@datedebut", dateDebut);
+            ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
+            connection.ReqUpdate(req, parameters);
+            connection.Close();
+        }
+
+        /// <summary>
+        /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour modifier une absence de la base de données.
+        /// </summary>
+        /// <param name="absenceAModifier">Objet de type absence, correspondant à l'absence initiale qu'on veut modifier.</param>
+        /// <param name="nouvelleAbsence">Objet de type absence, correspondant à l'absence initiale modifiée.</param>
+        public static void UpdateAbsence(Absence absenceAModifier, Absence nouvelleAbsence)
+        {
+            string ancienneDateDebut = DateTime.Parse(absenceAModifier.DateDebut).ToString("yyyy-MM-dd");
+            string req = "update absence set datedebut = @nouveaudatedebut, idmotif = @idmotif, datefin = @datefin ";
+            req += "where idpersonnel = @idpersonnel and DATE(datedebut) = @anciennedatedebut;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@nouveaudatedebut", nouvelleAbsence.DateDebut);
+            parameters.Add("idmotif", nouvelleAbsence.IdMotif);
+            parameters.Add("datefin", nouvelleAbsence.DateFin);
+            parameters.Add("idpersonnel", absenceAModifier.IdPersonnel);
+            parameters.Add("@anciennedatedebut", ancienneDateDebut);
             ConnexionBDD connection = ConnexionBDD.GetInstance(connectionString);
             connection.ReqUpdate(req, parameters);
             connection.Close();

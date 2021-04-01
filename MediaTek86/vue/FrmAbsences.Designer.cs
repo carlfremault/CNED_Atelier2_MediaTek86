@@ -65,6 +65,7 @@ namespace MediaTek86.vue
             this.btnModifAbsence.TabIndex = 2;
             this.btnModifAbsence.Text = "Modifier absence";
             this.btnModifAbsence.UseVisualStyleBackColor = true;
+            this.btnModifAbsence.Click += new System.EventHandler(this.btnModifAbsence_Click);
             // 
             // btnSuppAbsence
             // 

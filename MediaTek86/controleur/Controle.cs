@@ -1,11 +1,7 @@
 ﻿using MediaTek86.dal;
 using MediaTek86.modele;
 using MediaTek86.vue;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaTek86.controleur
 {
@@ -136,14 +132,18 @@ namespace MediaTek86.controleur
         /// <summary>
         /// Méthode qui ferme la vue FrmAMAbsences et rafraîchit les absences affichées dans la vue FrmAbsences.
         /// </summary>
-        /// <param name="personnelAbsence"></param>
+        /// <param name="personnelAbsence">Objet de type Personnel qui représente le membre du personnel dont les absences sont affichées.</param>
         public void FermerAMAbsences(Personnel personnelAbsence)
         {
-            frmAbsences.RemplirListeAbsences(personnelAbsence);
             frmAMAbsences.InitialiserLesChamps();
+            frmAbsences.RemplirListeAbsences(personnelAbsence);
             frmAMAbsences.Hide();
         }
 
+        /// <summary>
+        /// Méthode qui ouvre la vue FrmAMAbsences et lui envoie l'instance de la classe Personnel qui représente le membre du personnel pour lequel on souhaite ajouter une absence.
+        /// </summary>
+        /// <param name="personnelAbsence">Objet de type Personnel qui représente le membre du personnel pour lequel on souhaite ajouter une absence.</param>
         public void AjouterAbsence(Personnel personnelAbsence)
         {
             frmAMAbsences.Text = "Ajouter absence";
@@ -203,6 +203,35 @@ namespace MediaTek86.controleur
         public void DelAbsence(Absence absence, Personnel personnelAbsence)
         {
             AccesDonnees.DelAbsence(absence, personnelAbsence);
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode ModifierAbsence de la vue FrmAMAbsences en lui envoyant l'absence à modifier et le personnel concerné.
+        /// Ouvre ensuite la vue FrmAMAbsences.
+        /// </summary>
+        /// <param name="absence">Objet de type Absence qui représente l'absence à modifier.</param>
+        /// <param name="personnel">Objet de type Personnel qui représente le membre du personnel dont on modifie une absence.</param>
+        public void ModifierAbsence(Absence absence, Personnel personnel)
+        {
+            frmAMAbsences.Text = "Modifier absence";
+            frmAMAbsences.ModifierAbsence(absence, personnel);   
+            frmAMAbsences.ShowDialog();
+        }
+
+        /// <summary>
+        /// Méthode qui appelle la méthode UpdateAbsence de la classe AccesDonnees pour modifier une absence.
+        /// Deux instances de type Absence sont envoyées en paramètre: 
+        /// - l'ancienne absence à modifier, car on a besoin de connaître l'ancienne date de début afin de retrouver l'absence à modifier dans la base de données.
+        /// - l'absence modifié.
+        /// Ferme ensuite la vue FrmAMAbsences.
+        /// </summary>
+        /// <param name="absenceAModifier">Objet de type Absence qui représente l'absence initiale à modifier.</param>
+        /// <param name="nouvelleAbsence">Objet de type Absence qui représente l'absence modifiée.</param>
+        /// <param name="personnel">Objet de type Personnel qui représente le membre du personnel dont on modifie une absence.</param>
+        public void UpdateAbsence(Absence absenceAModifier, Absence nouvelleAbsence, Personnel personnel)
+        {
+            AccesDonnees.UpdateAbsence(absenceAModifier, nouvelleAbsence);
+            FermerAMAbsences(personnel);
         }
     }
 }

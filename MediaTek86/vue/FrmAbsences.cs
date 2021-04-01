@@ -2,12 +2,6 @@
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaTek86.vue
@@ -101,6 +95,27 @@ namespace MediaTek86.vue
                     controle.DelAbsence(absence, personnelAbsence);
                     RemplirListeAbsences(personnelAbsence);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une absence.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Méthode évenementielle après un clic sur le bouton 'Modifier absence'.
+        /// Vérifie si une absence a été sélectionnée. 
+        /// Après confirmation, appelle la méthode ModifierAbsence du contrôleur en lui envoyant l'absence à modifier ainsi que
+        /// un objet de type Personnel qui représente le membre du personnel pour lequel on veut modifier l'absence.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnModifAbsence_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                controle.ModifierAbsence(absence, personnelAbsence);
             }
             else
             {
