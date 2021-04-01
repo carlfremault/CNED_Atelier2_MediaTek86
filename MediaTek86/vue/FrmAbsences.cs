@@ -1,4 +1,9 @@
-﻿using MediaTek86.controleur;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MediaTek86.controleur;
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;

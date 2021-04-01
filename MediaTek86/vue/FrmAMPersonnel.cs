@@ -1,4 +1,9 @@
-﻿using MediaTek86.controleur;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MediaTek86.controleur;
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
@@ -27,9 +32,9 @@ namespace MediaTek86.vue
         private Boolean modification = false;
 
         /// <summary>
-        /// Instance de la classe Personnel qui représente un membre du personnel à modifier.
+        /// Entier qui représente l'idPersonnel du membre du personnel qu'on veut modifier.
         /// </summary>
-        private Personnel personnelAModifier;
+        private int idPersonnelAModifier;
 
         /// <summary>
         /// Constructeur de la classe. Appelle la méthode RemplirServices pour remplir la combobox des services.
@@ -95,12 +100,7 @@ namespace MediaTek86.vue
                 Service leService = (Service)bdgServices.List[bdgServices.Position];
                 if (modification)
                 {
-                    personnelAModifier.Nom = txtNom.Text;
-                    personnelAModifier.Prenom = txtPrenom.Text;
-                    personnelAModifier.Tel = txtTel.Text;
-                    personnelAModifier.Mail = txtMail.Text;
-                    personnelAModifier.IdService = leService.IdService;
-                    personnelAModifier.Service = leService.Nom;
+                    Personnel personnelAModifier = new Personnel(idPersonnelAModifier, leService.IdService, txtNom.Text, txtPrenom.Text, leService.Nom, txtTel.Text, txtMail.Text);
 
                     if (MessageBox.Show("Souhaitez-vous confirmer la modification?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -135,7 +135,7 @@ namespace MediaTek86.vue
             if (!(personnel is null))
             {
                 modification = true;
-                personnelAModifier = personnel;
+                idPersonnelAModifier = personnel.IdPersonnel;
                 txtNom.Text = personnel.Nom;
                 txtPrenom.Text = personnel.Prenom;
                 txtTel.Text = personnel.Tel;

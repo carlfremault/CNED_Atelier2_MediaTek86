@@ -1,4 +1,9 @@
-﻿using MySqlConnector;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

@@ -77,6 +77,7 @@ namespace MediaTek86.vue
             this.btnConnecter.TabIndex = 4;
             this.btnConnecter.Text = "Connecter";
             this.btnConnecter.UseVisualStyleBackColor = true;
+            this.btnConnecter.Click += new System.EventHandler(this.btnConnecter_Click);
             // 
             // FrmAuthentification
             // 

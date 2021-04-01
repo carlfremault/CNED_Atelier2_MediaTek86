@@ -1,4 +1,9 @@
-﻿using MediaTek86.controleur;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MediaTek86.controleur;
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
@@ -59,7 +64,9 @@ namespace MediaTek86.vue
         /// Méthode évenementielle après un clic sur le bouton 'Supprimer personnel'.
         /// Vérifie si un membre du personnel a été sélectionné.
         /// Demande confirmation de suppression.
-        /// Après confirmation, appelle la méthode DelPersonnel du contrôleur en lui envoyant on objet du type Personnel,
+        /// Après confirmation, récupère la liste des absences du membre du personnel à supprimer. 
+        /// Appelle la méthode DelAbsence du contrôleur pour supprimer toutes les éventuelles absences.
+        /// Appelle ensuite la méthode DelPersonnel du contrôleur en lui envoyant on objet du type Personnel,
         /// représentant le membre du personnel à supprimer, et rafraîchit ensuite la liste du personnel.
         /// </summary>
         /// <param name="sender"></param>
@@ -71,6 +78,11 @@ namespace MediaTek86.vue
                 Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
                 if (MessageBox.Show("Confirmez-vous la suppression de " + personnel.Prenom + " " + personnel.Nom + " de la liste?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
+                    List<Absence> absences = controle.GetLesAbsences(personnel);
+                    foreach(Absence absence in absences)
+                    {
+                        controle.DelAbsence(absence, personnel);
+                    }
                     controle.DelPersonnel(personnel);
                     RemplirListePersonnel();
                 }

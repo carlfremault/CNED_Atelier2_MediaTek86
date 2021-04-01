@@ -1,4 +1,9 @@
-﻿using MediaTek86.connexion;
+﻿/** 
+ * Application MediaTek86
+ * Carl Fremault
+ * Avril 2021
+ */
+using MediaTek86.connexion;
 using MediaTek86.modele;
 using System;
 using System.Collections.Generic;
@@ -14,6 +19,51 @@ namespace MediaTek86.dal
         /// Chaine qui contient les paramètre nécessaires pour se connecter à la base de données.
         /// </summary>
         private static string connectionString = "server=localhost;user id=mediatek86; password=motdepasse; database=mediatek86; Sslmode=none";
+
+        /// <summary>
+        /// Méthode qui crée une requête sql qui récupère les utilisateurs et les mots de passe correspondants de la table 'responsable' de la base de données, 
+        /// à condition qu'ils correspondent avec le nom d'utilisateur et mot de passe saisis par l'utilisateur.
+        /// Retourne 'vrai' si c'est le cas, 'faux' si le curseur est vide (et donc aucun utilisateur/motdepasse correspondant a été trouvé).
+        /// </summary>
+        /// <param name="utilisateur">Le nom d'utilisateur saisi par l'utilisateur dans la vue FrmAuthentification.</param>
+        /// <param name="motdepasse">Le mot de passe saisi par l'utilisateur dans la vue FrmAuthentification.</param>
+        /// <returns></returns>
+        public static Boolean VerifierAuthentification(string utilisateur, string motdepasse)
+        {
+            string req = "select * from responsable where login=@login and pwd=@pwd;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@login", utilisateur);
+            parameters.Add("@pwd", GetStringSha256Hash(motdepasse));
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, parameters);
+
+            if (curseur.Read())
+            {
+                curseur.Close();
+                return true;
+            }
+            else
+            {
+                curseur.Close();
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode qui retourne le hash d'une chaîne passé en entrée.
+        /// </summary>
+        /// <param name="motdepasse">La chaine dont on veut récupérer un hash.</param>
+        /// <returns>Le hash de la chaîne passé en entrée.</returns>
+        private static string GetStringSha256Hash(string motdepasse)
+        {
+            if (string.IsNullOrEmpty(motdepasse)) return string.Empty;
+            using (var sha = new System.Security.Cryptography.SHA256Managed())
+            {
+                byte[] textData = System.Text.Encoding.UTF8.GetBytes(motdepasse);
+                byte[] hash = sha.ComputeHash(textData);
+                return BitConverter.ToString(hash).Replace("-", string.Empty);
+            }
+        }
 
         /// <summary>
         /// Méthode qui crée une requête SQL puis l'envoie à la classe ConnexionBDD pour récupérer une liste d'objets du type Personnel, correspondant aux membres du personnel enregistrés dans la base de données.

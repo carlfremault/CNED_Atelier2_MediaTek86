@@ -41,6 +41,7 @@ namespace MediaTek86.vue
             // 
             // dtpDebut
             // 
+            this.dtpDebut.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDebut.Location = new System.Drawing.Point(134, 12);
             this.dtpDebut.Name = "dtpDebut";
             this.dtpDebut.Size = new System.Drawing.Size(200, 26);
@@ -48,6 +49,7 @@ namespace MediaTek86.vue
             // 
             // dtpFin
             // 
+            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFin.Location = new System.Drawing.Point(134, 59);
             this.dtpFin.Name = "dtpFin";
             this.dtpFin.Size = new System.Drawing.Size(200, 26);
